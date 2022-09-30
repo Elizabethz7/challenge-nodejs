@@ -8,7 +8,8 @@ var MutantRoutes = /** @class */ (function () {
         this.config();
     }
     MutantRoutes.prototype.config = function () {
-        this.router.get('/', mutantController_1.mutantController.index);
+        this.router.post('/', mutantController_1.mutantController.isMutant);
+        this.router.get('/api', mutantController_1.mutantController.index);
     };
     return MutantRoutes;
 }());

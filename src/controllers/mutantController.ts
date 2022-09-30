@@ -1,4 +1,5 @@
 import { Request, Response } from 'express';
+import { isMutant } from '../lib/isMutant';
 
 class MutantController{
 
@@ -6,11 +7,10 @@ class MutantController{
       res.send('API running');
    }
 
-   // public async getUsers(req:Request, res:Response) {
-   //    const pesos = await pool.query('SELECT * FROM usuario');
-   //      res.json(pesos);
-   // }
-
+    public async isMutant(req:Request, res:Response) {
+        console.log(req.body);  
+        return isMutant.isMutant(req.body.dna)? res.status(200).send('OK'): res.status(403).send('Forbidden');
+    }
 
 }
 
