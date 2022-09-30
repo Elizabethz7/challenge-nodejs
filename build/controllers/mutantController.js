@@ -47,7 +47,6 @@ var MutantController = /** @class */ (function () {
     MutantController.prototype.isMutant = function (req, res) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
-                console.log(req.body);
                 return [2 /*return*/, isMutant_1.isMutant.isMutant(req.body.dna) ? res.status(200).send('OK') : res.status(403).send('Forbidden')];
             });
         });

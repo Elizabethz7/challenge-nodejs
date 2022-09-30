@@ -28,7 +28,6 @@ var IsMutant = /** @class */ (function () {
             if (count > 1)
                 return true;
         }
-        console.log('cpunt', count);
         return false;
     };
     IsMutant.prototype.checkMatches = function (input) {

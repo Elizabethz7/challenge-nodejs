@@ -1,0 +1,9 @@
+CREATE DATABASE IF NOT EXISTS mutant_log CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+USE mutant_log;
+
+CREATE TABLE IF NOT EXISTS `registry` (
+  id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  dna TEXT NOT NULL,
+  is_mutant TINYINT(1) DEFAULT NULL,
+);

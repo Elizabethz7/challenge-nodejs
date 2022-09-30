@@ -18,10 +18,7 @@ class IsMutant{
             for(let j = 0; j < dna.length; j++){
 
                 verticalString += dna[j][i];
-
                 count += this.checkDiagonal(dna, i, j);
-
-
                 if(count > 1) return true;
             }
             count += this.checkVertical(verticalString);
@@ -29,7 +26,6 @@ class IsMutant{
             if(count > 1) return true;
 
         }
-        console.log('cpunt',count);
         return false;
     }
 
@@ -69,8 +65,6 @@ class IsMutant{
         
         return count;
     }
-
-
 
 }
 
