@@ -2,10 +2,17 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.isMutant = void 0;
 var matrixValidations_1 = require("../lib/matrixValidations");
+var Record_1 = require("../models/Record");
+var querys_1 = require("../sources/querys");
 var IsMutant = /** @class */ (function () {
     function IsMutant() {
         this.expresionMatch = new RegExp(/([ATCG])\1{3,}/g);
     }
+    IsMutant.prototype.saveRecord = function (dna, isMutant) {
+        var record = new Record_1.Record(-1, matrixValidations_1.matrixValidations.arrayToString(dna), isMutant);
+        querys_1.querys.insertRegistry(record);
+        return isMutant;
+    };
     IsMutant.prototype.isMutant = function (dna) {
         if (!matrixValidations_1.matrixValidations.isSquare(dna))
             return false;
@@ -22,13 +29,13 @@ var IsMutant = /** @class */ (function () {
                 verticalString += dna[j][i];
                 count += this.checkDiagonal(dna, i, j);
                 if (count > 1)
-                    return true;
+                    return this.saveRecord(dna, true);
             }
             count += this.checkVertical(verticalString);
             if (count > 1)
-                return true;
+                return this.saveRecord(dna, true);
         }
-        return false;
+        return this.saveRecord(dna, false);
     };
     IsMutant.prototype.checkMatches = function (input) {
         var _a;

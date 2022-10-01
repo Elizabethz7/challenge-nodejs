@@ -13,6 +13,9 @@ var MatrixValidations = /** @class */ (function () {
     MatrixValidations.prototype.isOnlyATCG = function (input) {
         return input.every(function (row) { return row.match(/^[ATCG]+$/); });
     };
+    MatrixValidations.prototype.arrayToString = function (input) {
+        return input.join('');
+    };
     return MatrixValidations;
 }());
 exports.matrixValidations = new MatrixValidations();

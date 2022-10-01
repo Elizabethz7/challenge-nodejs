@@ -10,6 +10,7 @@ class MutantRoutes{
 
     config():void {
         this.router.post('/', mutantController.isMutant);
+        this.router.get('/stats', mutantController.statistics);
         this.router.get('/api', mutantController.index);
     }
 
