@@ -14,13 +14,16 @@ services:
       - '3306:3306'
 
   mutant:
-      restart: always
-      environment:
-        DB_HOST: mysql
-        DB_NAME: "root"
-        DB_PASSWORD: "pwdmuntant"
-        DB_DATABASE: "mutant_log"
-      ports:
-        - 3000:3000
-      depends_on:
-        - mysql
+    build:
+      dockerfile: Dockerfile
+      context: ./src
+    restart: always
+    environment:
+      DB_HOST: mysql
+      DB_NAME: "root"
+      DB_PASSWORD: "pwdmuntant"
+      DB_DATABASE: "mutant_log"
+    ports:
+      - 3000:3000
+    depends_on:
+      - mysql
