@@ -71,7 +71,7 @@ var Querys = /** @class */ (function () {
                 switch (_a.label) {
                     case 0:
                         _a.trys.push([0, 2, , 3]);
-                        return [4 /*yield*/, connection_1.default.query("SELECT SUM(IF is_mutant = 1, 1, 0)) AS count_mutant_dna,\n            SUM(IF is_mutant = 0, 1, 0)) AS count_human_dna, (count_mutant_dna/count_human_dna) ratio FROM registry")];
+                        return [4 /*yield*/, connection_1.default.query("SELECT SUM(IF (is_mutant = 1, 1, 0)) AS count_mutant_dna,\n            SUM(IF (is_mutant = 0, 1, 0)) AS count_human_dna, \n            (SUM(IF (is_mutant = 1, 1, 0))/SUM(IF (is_mutant = 0, 1, 0))) AS ratio \n            FROM registry")];
                     case 1:
                         query = _a.sent();
                         return [2 /*return*/, query];
