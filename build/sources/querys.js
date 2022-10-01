@@ -35,47 +35,55 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.mutantController = void 0;
-var isMutant_1 = require("../lib/isMutant");
-var querys_1 = require("../sources/querys");
-var MutantController = /** @class */ (function () {
-    function MutantController() {
+exports.querys = void 0;
+var connection_1 = __importDefault(require("../connection"));
+var Querys = /** @class */ (function () {
+    function Querys() {
     }
-    MutantController.prototype.index = function (req, res) {
-        res.send('API running');
-    };
-    MutantController.prototype.isMutant = function (req, res) {
+    Querys.prototype.insertRegistry = function (record) {
         return __awaiter(this, void 0, void 0, function () {
-            var isMutantReq;
-            return __generator(this, function (_a) {
-                if (req.body.dna) {
-                    isMutantReq = isMutant_1.isMutant.isMutant(req.body.dna);
-                    if (isMutantReq) {
-                        return [2 /*return*/, res.status(200).send('OK')];
-                    }
-                    return [2 /*return*/, res.status(403).send('Forbidden')];
-                }
-                return [2 /*return*/, res.status(403).send('Forbidden')];
-            });
-        });
-    };
-    MutantController.prototype.statistics = function (req, res) {
-        return __awaiter(this, void 0, void 0, function () {
-            var stats;
+            var query, error_1;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, querys_1.querys.stats()];
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        return [4 /*yield*/, connection_1.default.query('INSERT INTO registry(`dna`,`is_mutant`) VALUES(?, ?)', [record.dna, record.is_mutant])];
                     case 1:
-                        stats = _a.sent();
-                        if (stats) {
-                            return [2 /*return*/, res.json(stats)];
-                        }
-                        return [2 /*return*/, res.status(500).send('Internal Server Error')];
+                        query = _a.sent();
+                        return [3 /*break*/, 3];
+                    case 2:
+                        error_1 = _a.sent();
+                        console.error(error_1);
+                        return [3 /*break*/, 3];
+                    case 3: return [2 /*return*/];
                 }
             });
         });
     };
-    return MutantController;
+    Querys.prototype.stats = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            var query, error_2;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        return [4 /*yield*/, connection_1.default.query("SELECT SUM(IF is_mutant = 1, 1, 0)) AS count_mutant_dna,\n            SUM(IF is_mutant = 0, 1, 0)) AS count_human_dna, (count_mutant_dna/count_human_dna) ratio FROM registry")];
+                    case 1:
+                        query = _a.sent();
+                        return [2 /*return*/, query];
+                    case 2:
+                        error_2 = _a.sent();
+                        console.error(error_2);
+                        return [3 /*break*/, 3];
+                    case 3: return [2 /*return*/];
+                }
+            });
+        });
+    };
+    return Querys;
 }());
-exports.mutantController = new MutantController();
+exports.querys = new Querys();

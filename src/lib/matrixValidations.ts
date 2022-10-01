@@ -12,6 +12,10 @@ class MatrixValidations{
         return input.every((row) => row.match(/^[ATCG]+$/));
     }
 
+    public arrayToString(input: string[]){
+        return input.join('');
+    }
+
 }
 
 export const matrixValidations = new MatrixValidations();
