@@ -14,7 +14,6 @@ services:
       - '3306:3306'
 
   mutant:
-      dockerfile: Dockerfile
       restart: always
       environment:
         DB_HOST: mysql
