@@ -7,8 +7,8 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: pwdmuntant
     volumes:
-      - '${PWD}/db:/docker-entrypoint-initdb.d'
-      - '${PWD}/data:/var/lib/mysql'
+      - 'db:/docker-entrypoint-initdb.d'
+      - 'data:/var/lib/mysql'
       - ./init.sql:/data/application/init.sql
     ports:
       - '3306:3306'
