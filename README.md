@@ -39,6 +39,15 @@ Ya teniendo instalado Docker y docker-compose en la computadora correr el siguie
 sudo docker-compose up
 ```
 
+### Server
+Para consumir el servicio seria las siguientes URLs
+
+```
+(POST) http://44.211.202.186:3000/mutant/
+(GET) http://44.211.202.186:3000/mutant/stats
+```
+
+
 ### Test
 Para correr las pruebas de forma local solo hacer:
 
