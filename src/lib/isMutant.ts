@@ -1,17 +1,8 @@
 import { matrixValidations } from '../lib/matrixValidations';
-import { Record } from '../models/Record';
-import { querys } from '../sources/querys';
 
 class IsMutant{
 
     expresionMatch = new RegExp(/([ATCG])\1{3,}/g);
-
-    saveRecord(dna: string[], isMutant: boolean){
-        let record =  new Record(-1, matrixValidations.arrayToString(dna), isMutant);
-        querys.insertRegistry(record);
-        return isMutant;
-
-    }
 
     public isMutant(dna: string[]): boolean{
         if(!matrixValidations.isSquare(dna)) return false;
@@ -28,14 +19,14 @@ class IsMutant{
 
                 verticalString += dna[j][i];
                 count += this.checkDiagonal(dna, i, j);
-                if(count > 1) return this.saveRecord(dna, true);
+                if(count > 1) return true;
             }
             count += this.checkVertical(verticalString);
 
-            if(count > 1) return this.saveRecord(dna, true);
+            if(count > 1) return true;
 
         }
-        return this.saveRecord(dna, false);
+        return false;
     }
 
     public checkMatches(input: string){

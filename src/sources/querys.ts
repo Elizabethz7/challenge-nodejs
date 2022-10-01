@@ -1,7 +1,14 @@
 import pool from '../connection';
+import { matrixValidations } from '../lib/matrixValidations';
 import { Record } from '../models/Record';
 
 class Querys {
+
+    saveRecord(dna: string[], isMutant: boolean){
+        let record =  new Record(-1, matrixValidations.arrayToString(dna), isMutant);
+        this.insertRegistry(record);
+        return isMutant;
+    }
 
     public async insertRegistry(record: Record){
         try {

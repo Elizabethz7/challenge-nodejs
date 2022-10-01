@@ -12,8 +12,10 @@ class MutantController{
         if(req.body.dna){
             const isMutantReq = isMutant.isMutant(req.body.dna);
             if(isMutantReq){
+                querys.saveRecord(req.body.dna, isMutantReq);
                 return res.status(200).send('OK');
             }
+        querys.saveRecord(req.body.dna, isMutantReq);
             return res.status(403).send('Forbidden');
         }
         return res.status(403).send('Forbidden');
